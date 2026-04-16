@@ -14,7 +14,7 @@
 
 - name: Verify stonith is enabled
   ansible.builtin.shell: |
-    oc debug node/{{ node_names[0] }} -- chroot /host bash -c "pcs property show stonith-enabled"
+    oc debug node/{{ node_names[0] }} -- chroot /host bash -c "pcs property config stonith-enabled"
   register: pcs_stonith_verify_result
   delegate_to: localhost
   environment:
@@ -31,8 +31,8 @@
 
 - name: Fail if stonith is not enabled
   fail:
-    msg: "STONITH is not enabled. Expected 'stonith-enabled: true' but got: {{ pcs_stonith_verify_result.stdout | default('No output') }}"
-  when: "'stonith-enabled: true' not in pcs_stonith_verify_result.stdout"
+    msg: "STONITH is not enabled. Expected 'stonith-enabled=true' but got: {{ pcs_stonith_verify_result.stdout | default('No output') }}"
+  when: "'stonith-enabled=true' not in pcs_stonith_verify_result.stdout"
 
 - name: List all stonith resources
   ansible.builtin.shell: |
