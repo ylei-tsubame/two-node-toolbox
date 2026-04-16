@@ -18,4 +18,4 @@ cluster_domains:
   - ".okd.on.massopen.cloud"
   - ".p1.openshiftapps.com"
   - "sso.redhat.com"
-  - ".lab.example.com"
+  - ".{{ domain }}"
