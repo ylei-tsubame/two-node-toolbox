@@ -5,7 +5,7 @@
 
 - name: Get cluster VM names
   shell: |
-    virsh -c qemu:///system list --name | grep "^{{ test_cluster_name }}"
+    virsh -c qemu:///system list --name | grep "^{{ test_cluster_name }}-\(bootstrap\|ctlplane\)"
   register: cluster_vms
   changed_when: false
   failed_when: false
