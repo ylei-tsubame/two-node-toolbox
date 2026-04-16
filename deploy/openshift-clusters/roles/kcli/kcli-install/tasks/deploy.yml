@@ -4,9 +4,11 @@
 - name: Set kcli deployment command
   set_fact:
     kcli_cmd: >
-      kcli create cluster openshift
-      --paramfile {{ kcli_params_file }}
+      kcli
       {{ '--debug' if kcli_debug else '' }}
+      create cluster openshift
+      --paramfile {{ kcli_params_file }}
+      --paramfile "{{ role_path }}/files/kcli-registry.yml"
       {{ test_cluster_name }}
 
 - name: Display deployment command
